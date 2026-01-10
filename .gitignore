@@ -1,0 +1,72 @@
+# .gitignore para proyecto Java
+
+# Compiled class files
+*.class
+
+# Build directories
+/bin/
+/build/
+/out/
+/target/
+
+# IDE / editor files
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*~
+tmp/
+
+# Environment / secrets
+.env
+.env.*
+secrets.json
+credentials
+*.secret
+
+# Keys and certificates
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.crt
+
+# SSH keys (sensitive)
+id_rsa
+id_rsa.pub
+.ssh/
+
+# Database files (local DBs/backups)
+*.db
+*.sqlite
+*.sqlite3
+
+# Gradle / Maven
+.gradle/
+.mvn/
+
+# Ignore IDE-specific workspace metadata
+.idea/
+*.class
+
+# Optional: ignore generated jar/war files (uncomment if desired)
+# *.jar
+# *.war
+# *.ear
+
+# Keep this file under source control; adjust patterns as needed
