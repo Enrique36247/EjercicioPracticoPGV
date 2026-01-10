@@ -945,4 +945,242 @@ Se cumplieron todos los objetivos del proyecto:
   - UPDATE: PUT /books/{id}
   - DELETE: DELETE /books/{id}
 
-✓ **Integración con MySQL** mediante JDBC
+✓ **Integración con MySQL** mediante JDBC con gestión apropiada de recursos
+
+✓ **Respuestas HTTP válidas** con códigos de estado apropiados (200, 201, 400, 404, 500)
+
+✓ **Manejo de errores robusto** en tres niveles: validación de entrada, validación de negocio y errores de base de datos
+
+✓ **Serialización JSON** implementada manualmente sin bibliotecas externas
+
+✓ **Prevención de SQL Injection** usando PreparedStatement
+
+### 10.2 Aprendizajes Principales
+
+**1. Protocolo HTTP:**
+- Estructura de solicitudes y respuestas HTTP
+- Importancia de las cabeceras (Content-Type, Content-Length)
+- Códigos de estado y su significado
+
+**2. Arquitectura de Aplicaciones:**
+- Separación en capas (Presentación, Aplicación, Datos, Modelo)
+- Responsabilidad única de cada clase
+- Desacoplamiento de componentes
+
+**3. Gestión de Recursos:**
+- Importancia de cerrar conexiones y streams
+- Patrón try-with-resources
+- Prevención de memory leaks
+
+**4. Seguridad:**
+- Vulnerabilidades de SQL Injection
+- Validación de entrada
+- Escapado de caracteres especiales
+
+**5. JDBC:**
+- Manejo de conexiones a bases de datos
+- PreparedStatement vs Statement
+- Recuperación de IDs autogenerados
+
+### 10.3 Valor Educativo del Proyecto
+
+Este proyecto demuestra que es posible construir un servidor HTTP funcional sin frameworks, lo cual:
+
+- **Profundiza el entendimiento** de cómo funcionan las tecnologías web por debajo
+- **Aprecia el valor de los frameworks** al ver la complejidad que abstraen
+- **Desarrolla habilidades de debugging** al trabajar a bajo nivel
+- **Mejora la comprensión de sockets** y programación de red
+- **Fortalece conocimientos de SQL** y gestión de bases de datos
+
+### 10.4 Diferencias con Frameworks Modernos
+
+**Lo que este proyecto NO tiene (pero Spring Boot sí):**
+- Inyección de dependencias
+- Configuración automática
+- Pool de conexiones integrado
+- Serialización JSON automática con Jackson
+- Manejo de excepciones centralizado
+- Logging configurable
+- Métricas y monitoreo
+- Testing integrado
+- Documentación automática de API
+
+**Por qué es importante entenderlo:**
+- Frameworks como Spring Boot construyen sobre estos conceptos
+- Debugging es más fácil cuando entiendes lo que pasa por debajo
+- Mejor toma de decisiones arquitectónicas
+- Capacidad de optimizar cuando sea necesario
+
+### 10.5 Reflexión Final
+
+La implementación de un servidor HTTP desde cero con sockets Java ha sido un ejercicio revelador que demuestra la complejidad inherente de las comunicaciones web. Aunque frameworks como Spring Boot simplifican enormemente este proceso, comprender los fundamentos permite:
+
+1. **Apreciar el trabajo** que realizan los frameworks
+2. **Diagnosticar problemas** más eficientemente
+3. **Tomar mejores decisiones** de arquitectura
+4. **Optimizar rendimiento** cuando es crítico
+5. **Entender limitaciones** de las tecnologías
+
+Este proyecto es un punto de partida excelente para comprender cómo evolucionan las aplicaciones desde implementaciones básicas hasta arquitecturas empresariales sofisticadas.
+
+---
+
+## 11. REFERENCIAS Y RECURSOS
+
+### 11.1 Documentación Oficial
+
+**Java SE:**
+- Oracle Java Documentation: https://docs.oracle.com/javase/8/docs/
+- java.net.Socket API: https://docs.oracle.com/javase/8/docs/api/java/net/Socket.html
+- java.net.ServerSocket: https://docs.oracle.com/javase/8/docs/api/java/net/ServerSocket.html
+
+**JDBC:**
+- JDBC Tutorial: https://docs.oracle.com/javase/tutorial/jdbc/
+- java.sql Package: https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html
+- PreparedStatement: https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html
+
+**MySQL:**
+- MySQL Connector/J: https://dev.mysql.com/doc/connector-j/8.0/en/
+- MySQL Documentation: https://dev.mysql.com/doc/
+
+**HTTP Protocol:**
+- RFC 2616 - HTTP/1.1: https://www.ietf.org/rfc/rfc2616.txt
+- HTTP Status Codes: https://developer.mozilla.org/es/docs/Web/HTTP/Status
+
+### 11.2 Herramientas Utilizadas
+
+**Desarrollo:**
+- Java Development Kit (JDK) 8+
+- MySQL Server 8.0
+- MySQL Connector/J 9.4.0
+- IntelliJ IDEA / Eclipse / VS Code
+
+**Pruebas:**
+- cURL
+- Postman
+- MySQL Workbench
+
+**Control de Versiones:**
+- Git (recomendado para proyectos futuros)
+
+### 11.3 Recursos Adicionales
+
+**Tutoriales:**
+- Oracle Java Tutorials: https://docs.oracle.com/javase/tutorial/
+- Baeldung Java: https://www.baeldung.com/
+- Java Network Programming by O'Reilly
+
+**Mejores Prácticas:**
+- Effective Java by Joshua Bloch
+- Clean Code by Robert C. Martin
+- OWASP Security Guidelines
+
+---
+
+## ANEXOS
+
+### Anexo A: Comandos de Compilación y Ejecución
+
+**Compilación (Windows):**
+```bash
+javac -cp ".;lib/mysql-connector-java-9.4.0.jar" *.java
+```
+
+**Compilación (Linux/Mac):**
+```bash
+javac -cp ".:lib/mysql-connector-java-9.4.0.jar" *.java
+```
+
+**Ejecución (Windows):**
+```bash
+java -cp ".;lib/mysql-connector-java-9.4.0.jar" HttpServer
+```
+
+**Ejecución (Linux/Mac):**
+```bash
+java -cp ".:lib/mysql-connector-java-9.4.0.jar" HttpServer
+```
+
+### Anexo B: Configuración de MySQL
+
+**Crear usuario y otorgar privilegios:**
+```sql
+CREATE USER 'bookapi'@'localhost' IDENTIFIED BY 'password123';
+GRANT ALL PRIVILEGES ON library_db.* TO 'bookapi'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+**Verificar conexión:**
+```bash
+mysql -u bookapi -p library_db
+```
+
+### Anexo C: Script Completo de Pruebas
+
+```bash
+#!/bin/bash
+# Script de pruebas automatizado
+
+echo "=== Prueba 1: GET todos los libros ==="
+curl -X GET http://localhost:8080/books
+echo -e "\n"
+
+echo "=== Prueba 2: GET libro por ID ==="
+curl -X GET http://localhost:8080/books/1
+echo -e "\n"
+
+echo "=== Prueba 3: POST nuevo libro ==="
+curl -X POST http://localhost:8080/books \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Test Book","author":"Test Author","year":2024}'
+echo -e "\n"
+
+echo "=== Prueba 4: PUT actualizar libro ==="
+curl -X PUT http://localhost:8080/books/1 \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Updated Title","author":"Updated Author","year":2024}'
+echo -e "\n"
+
+echo "=== Prueba 5: DELETE libro ==="
+curl -X DELETE http://localhost:8080/books/4
+echo -e "\n"
+
+echo "=== Prueba 6: Error 404 ==="
+curl -X GET http://localhost:8080/books/999
+echo -e "\n"
+
+echo "Pruebas completadas"
+```
+
+### Anexo D: Troubleshooting
+
+**Problema: "Driver MySQL no encontrado"**
+- Solución: Verificar que mysql-connector-java.jar esté en lib/
+- Verificar el classpath al compilar y ejecutar
+
+**Problema: "Connection refused"**
+- Solución: Verificar que MySQL esté ejecutándose
+- Comando: `systemctl status mysql` (Linux) o Servicios (Windows)
+
+**Problema: "Unknown database 'library_db'"**
+- Solución: Ejecutar el script SQL de configuración
+- Comando: `mysql -u root -p < setup.sql`
+
+**Problema: "Access denied for user"**
+- Solución: Verificar credenciales en DatabaseManager.java
+- Verificar permisos del usuario en MySQL
+
+**Problema: "Port 8080 already in use"**
+- Solución: Cambiar el puerto en HttpServer.java
+- O cerrar la aplicación que está usando el puerto 8080
+
+---
+
+**Fin del Documento**
+
+---
+
+**Autor:** Enrique Pérez García  
+**Fecha de Elaboración:** Enero 2026  
+**Versión:** 1.0  
+**Institución:** IES El Rincón

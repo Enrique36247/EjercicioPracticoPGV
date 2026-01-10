@@ -19,7 +19,7 @@ proyecto/
 ├── HttpServer.java
 ├── setup.sql
 └── lib/
-    └── mysql-connector-java-8.0.33.jar
+    └── mysql-connector-java-9.4.0.jar
 ```
 
 ### 2. Descargar el Driver de MySQL
@@ -55,20 +55,20 @@ private static final String DB_PASSWORD = "tu_password"; // Tu contraseña
 
 ```bash
 # Windows
-javac -cp ".;lib/mysql-connector-java-8.0.33.jar" *.java
+javac -cp ".;lib/mysql-connector-java-9.4.0.jar" *.java
 
 # Linux/Mac
-javac -cp ".:lib/mysql-connector-java-8.0.33.jar" *.java
+javac -cp ".:lib/mysql-connector-java-9.4.0.jar" *.java
 ```
 
 ### Ejecutar el Servidor
 
 ```bash
 # Windows
-java -cp ".;lib/mysql-connector-java-8.0.33.jar" HttpServer
+java -cp ".;lib/mysql-connector-java-9.4.0.jar" HttpServer
 
 # Linux/Mac
-java -cp ".:lib/mysql-connector-java-8.0.33.jar" HttpServer
+java -cp ".:lib/mysql-connector-java-9.4.0.jar" HttpServer
 ```
 
 El servidor se iniciará en el puerto **8080**.
