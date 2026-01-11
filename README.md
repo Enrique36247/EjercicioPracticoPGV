@@ -65,10 +65,10 @@ javac -cp ".:lib/mysql-connector-java-9.4.0.jar" *.java
 
 ```bash
 # Windows
-java -cp ".;lib/mysql-connector-java-9.4.0.jar" HttpServer
+java -cp ".;lib/mysql-connector-java-9.4.0.jar" App
 
 # Linux/Mac
-java -cp ".:lib/mysql-connector-java-9.4.0.jar" HttpServer
+java -cp ".:lib/mysql-connector-java-9.4.0.jar" App
 ```
 
 El servidor se iniciará en el puerto **8080**.
